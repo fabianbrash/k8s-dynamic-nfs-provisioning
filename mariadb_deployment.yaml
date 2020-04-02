@@ -30,6 +30,13 @@ spec:
       containers:
       - name: mariadb
         image: mariadb:10.4-bionic
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "800m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
         ports:
         - containerPort: 3306
         env:
