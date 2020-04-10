@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
       - name: wp
-        image: wordpress:5.3.2
+        image: wordpress:5.4 # Very important
         resources:
           requests:
             memory: "64Mi"
@@ -46,6 +46,8 @@ spec:
           value: mariadb
         - name: WORDPRESS_DB_USER
           value: wp
+        - name: WORDPRESS_DB_NAME
+          value: custom_db_name
         - name: WORDPRESS_DB_PASSWORD
           valueFrom:
             secretKeyRef:
