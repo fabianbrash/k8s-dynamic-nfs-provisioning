@@ -30,6 +30,9 @@ spec:
       containers:
       - name: mariadb
         image: mariadb:10.4-bionic
+        args:
+        # if we deploy on a block device make sure mysql doesn't think lost+found is db folder
+          - "--ignore-db-dir=lost+found"
         resources:
           requests:
             memory: "1Gi"
@@ -45,6 +48,9 @@ spec:
               secretKeyRef:
                 name: mariasecret
                 key: password
+        livenessProbe:
+          tcpSocket:
+            port: 3306
         volumeMounts:
         - mountPath: /var/lib/mysql
           name: mariadb-persistent-storage
